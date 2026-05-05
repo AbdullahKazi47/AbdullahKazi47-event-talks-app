@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Talks Event Schedule</title>
+    <style>
+    :root {
+        --primary-color: #007bff;
+        --secondary-color: #6c757d;
+        --light-bg: #f8f9fa;
+        --dark-text: #343a40;
+        --border-color: #dee2e6;
+        --card-bg: #ffffff;
+        --break-bg: #e2f0fd;
+    }
+
+    body {
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--light-bg);
+        color: var(--dark-text);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    main {
+        flex: 1;
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        width: 100%;
+    }
+
+    .search-section {
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    #categorySearch {
+        width: 100%;
+        max-width: 400px;
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-size: 1rem;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .schedule-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .talk-card, .break-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .talk-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .break-card {
+        background-color: var(--break-bg);
+        border-color: #aed6f1;
+        text-align: center;
+    }
+
+    .talk-card h3, .break-card h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+        font-size: 1.5rem;
+    }
+
+    .talk-card .time, .break-card .time {
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .talk-card .speakers {
+        font-style: italic;
+        color: #555;
+        margin-bottom: 0.8rem;
+    }
+
+    .talk-card .category {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.8rem;
+    }
+
+    .talk-card .category span {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .talk-card p {
+        margin-bottom: 0;
+    }
+
+    footer {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: var(--dark-text);
+        color: white;
+        text-align: center;
+        box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+        .schedule-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .schedule-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Tech Talks Event Schedule</h1>
+    </header>
+    <main>
+        <section class="search-section">
+            <input type="text" id="categorySearch" placeholder="Search by category...">
+        </section>
+        <section class="schedule-section">
+            <div id="scheduleContainer" class="schedule-container">
+                <!-- Schedule will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Tech Talks Event</p>
+    </footer>
+    <!-- JavaScript will be embedded here -->
+    <script>
+    function addMinutes(date, minutes) {
+        return new Date(date.getTime() + minutes * 60000);
+    }
+
+    let currentTime = new Date();
+    currentTime.setHours(10, 0, 0, 0); // Set to 10:00 AM
+
+    const allTalks = [];
+
+    // Talk 1
+    allTalks.push({
+        id: "talk1",
+        title: "The Future of AI in Web Development",
+        speakers: ["Dr. Ava Sharma"],
+        category: ["AI", "Web Development"],
+        description: "Explore how artificial intelligence is shaping the next generation of web applications.",
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60); // 1 hour talk
+    allTalks[0].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    currentTime = addMinutes(currentTime, 10); // 10 min transition
+
+    // Talk 2
+    allTalks.push({
+        id: "talk2",
+        title: "Mastering Microservices with Node.js",
+        speakers: ["Ben Carter"],
+        category: ["Backend", "Node.js", "Architecture"],
+        description: "A deep dive into building scalable microservices using Node.js and best practices.",
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60);
+    allTalks[1].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    currentTime = addMinutes(currentTime, 10);
+
+    // Talk 3
+    allTalks.push({
+        id: "talk3",
+        title: "Responsive Design for the Modern Web",
+        speakers: ["Chloe Davis", "David Evans"],
+        category: ["Frontend", "UI/UX"],
+        description: "Techniques and tools for creating beautiful and adaptive user interfaces across all devices.",
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60);
+    allTalks[2].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    currentTime = addMinutes(currentTime, 10);
+
+    // Lunch Break
+    allTalks.push({
+        id: "lunch",
+        title: "Lunch Break",
+        speakers: [],
+        category: ["Break"],
+        description: "Enjoy a delicious and refreshing lunch!",
+        isBreak: true,
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60); // 1 hour lunch
+    allTalks[3].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    currentTime = addMinutes(currentTime, 10);
+
+    // Talk 4
+    allTalks.push({
+        id: "talk4",
+        title: "Securing Your JavaScript Applications",
+        speakers: ["Eve Foster"],
+        category: ["Security", "Frontend", "Backend"],
+        description: "Essential security practices for both client-side and server-side JavaScript.",
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60);
+    allTalks[4].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    currentTime = addMinutes(currentTime, 10);
+
+    // Talk 5
+    allTalks.push({
+        id: "talk5",
+        title: "Data Visualization with D3.js",
+        speakers: ["Frank Green"],
+        category: ["Frontend", "Data Science", "Visualization"],
+        description: "Learn to create interactive and compelling data visualizations using D3.js.",
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60);
+    allTalks[5].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    currentTime = addMinutes(currentTime, 10);
+
+    // Talk 6
+    allTalks.push({
+        id: "talk6",
+        title: "Deploying Node.js Apps to the Cloud",
+        speakers: ["Grace Hill"],
+        category: ["DevOps", "Cloud", "Node.js"],
+        description: "Strategies and tools for deploying and managing Node.js applications on cloud platforms.",
+        startTime: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    currentTime = addMinutes(currentTime, 60);
+    allTalks[6].endTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+
+    const scheduleContainer = document.getElementById('scheduleContainer');
+
+    function renderSchedule(talksToRender) {
+        scheduleContainer.innerHTML = ''; // Clear previous content
+
+        if (talksToRender.length === 0) {
+            scheduleContainer.innerHTML = '<p>No talks found matching your criteria.</p>';
+            return;
+        }
+
+        talksToRender.forEach(talk => {
+            const card = document.createElement('div');
+            card.classList.add(talk.isBreak ? 'break-card' : 'talk-card');
+
+            card.innerHTML = `
+                <span class="time">${talk.startTime} - ${talk.endTime}</span>
+                <h3>${talk.title}</h3>
+                ${talk.speakers && talk.speakers.length > 0 ? `<p class="speakers">Speaker(s): ${talk.speakers.join(', ')}</p>` : ''}
+                <p>${talk.description}</p>
+                <div class="category">
+                    ${talk.category.map(cat => `<span>${cat}</span>`).join('')}
+                </div>
+            `;
+            scheduleContainer.appendChild(card);
+        });
+    }
+
+    // Initial render of the full schedule
+    document.addEventListener('DOMContentLoaded', () => {
+        renderSchedule(allTalks);
+    });
+
+    const categorySearchInput = document.getElementById('categorySearch');
+
+    categorySearchInput.addEventListener('input', (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredTalks = allTalks.filter(talk => {
+            if (!searchTerm) {
+                return true; // Show all talks if search term is empty
+            }
+            // Check if any category includes the search term (case-insensitive)
+            return talk.category.some(cat => cat.toLowerCase().includes(searchTerm));
+        });
+        renderSchedule(filteredTalks);
+    });
+</script>
+</body>
+</html>
